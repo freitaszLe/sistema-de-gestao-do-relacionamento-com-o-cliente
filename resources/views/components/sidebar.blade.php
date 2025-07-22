@@ -4,13 +4,16 @@
     </div>
     <nav class="flex-grow px-4 py-4">
         <a href="{{ route('dashboard') }}" class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg hover:bg-gray-700">
-            Dashboard
+            Painel
         </a>
         <a href="#" class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg hover:bg-gray-700">
-            Relatórios (Exemplo)
+            Relatórios 
+        </a>
+        <a href="{{ route('products.index') }}" class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg hover:bg-gray-700">
+            Produtos 
         </a>
         <a href="#" class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg hover:bg-gray-700">
-            Configurações (Exemplo)
+            Configurações 
         </a>
     </nav>
 </div>

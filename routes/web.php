@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
     // Rota para deletar um contato
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+    Route::resource('products', App\Http\Controllers\ProductController::class);
+
+    Route::put('/customers/{customer}/products', [App\Http\Controllers\CustomerController::class, 'syncProducts'])->name('customers.products.sync');
 });
 
 // Arquivo de rotas de autenticação
