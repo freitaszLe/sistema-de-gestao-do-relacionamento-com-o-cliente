@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Contact;
+use App\Models\Product; 
 
 class CustomerController extends Controller
 {
@@ -76,9 +77,13 @@ public function index()
             abort(403, 'Acesso não autorizado.');
         }
         
-        $customer->load('contacts'); // Carrega os contatos associados ao cliente
+         $customer->load('contacts', 'products'); // Carrega contatos e produtos associados
+         $products = Product::all(); // Pega todos os produtos para a listagem
 
-        return view('customers.edit', ['customer' => $customer]);
+        return view('customers.edit', [
+            'customer' => $customer,
+            'products' => $products,
+        ]);
     }
 
 
@@ -117,5 +122,16 @@ public function index()
 
         // Redireciona de volta para a dashboard com uma mensagem de sucesso
         return redirect(route('dashboard'))->with('success', 'Cliente excluído com sucesso!');
+    }
+
+    public function syncProducts(Request $request, Customer $customer)
+    {
+        if (Auth::id() !== $customer->user_id) { abort(403); }
+
+        // O método sync é a mágica do Many-to-Many.
+        // Ele sincroniza a lista de produtos do cliente com o que foi marcado no formulário.
+        $customer->products()->sync($request->products);
+
+        return back()->with('success', 'Produtos do cliente atualizados com sucesso!');
     }
 }

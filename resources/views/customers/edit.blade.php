@@ -69,6 +69,31 @@
                 </div>
             </div>
 
+                        {{-- SEÇÃO 3: PRODUTOS DO CLIENTE --}}
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Produtos Adquiridos</h3>
+                <form action="{{ route('customers.products.sync', $customer) }}" method="POST">
+                    @csrf
+                    @method('PUT') 
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        @foreach ($products as $product)
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" name="products[]" value="{{ $product->id }}"
+                                    {{ $customer->products->contains($product) ? 'checked' : '' }}
+                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span>{{ $product->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                    <div class="mt-6">
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                            Salvar Produtos
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </x-app-layout>
