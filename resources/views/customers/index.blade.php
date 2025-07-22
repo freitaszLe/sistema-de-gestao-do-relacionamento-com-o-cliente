@@ -22,6 +22,33 @@
                         </div>
                     @endif
 
+                                        {{-- Cards de Estatísticas --}}
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        {{-- Card Total de Clientes --}}
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6">
+                                <h3 class="text-gray-500 text-sm font-semibold uppercase">Total de Clientes</h3>
+                                <p class="text-3xl font-bold mt-2">{{ $totalCustomers }}</p>
+                            </div>
+                        </div>
+                        {{-- Card Total de Contatos --}}
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6">
+                                <h3 class="text-gray-500 text-sm font-semibold uppercase">Total de Contatos</h3>
+                                <p class="text-3xl font-bold mt-2">{{ $totalContacts }}</p>
+                            </div>
+                        </div>
+                        {{-- Card Exemplo --}}
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6">
+                                <h3 class="text-gray-500 text-sm font-semibold uppercase">Vendas (Exemplo)</h3>
+                                <p class="text-3xl font-bold mt-2">R$ 1,234.56</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Tabela de Clientes --}}
+
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">

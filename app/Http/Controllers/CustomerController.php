@@ -11,14 +11,23 @@ use App\Models\Contact;
 class CustomerController extends Controller
 {
 
-    public function index()
-    {
-        // Pega o usuário logado e busca os clientes associados a ele
-        $customers = Auth::user()->customers;
+public function index()
+{
+    $user = auth()->user();
 
-        // Retorna a view de listagem, passando a lista de clientes
-        return view('customers.index', ['customers' => $customers]);
-    }
+    // Carrega os clientes e a contagem de contatos de forma otimizada
+    $customers = $user->customers()->withCount('contacts')->latest()->get();
+
+    // Calcula as estatísticas
+    $totalCustomers = $customers->count();
+    $totalContacts = $customers->sum('contacts_count'); // Soma a contagem de contatos de cada cliente
+
+    return view('customers.index', [
+        'customers' => $customers,
+        'totalCustomers' => $totalCustomers,
+        'totalContacts' => $totalContacts,
+    ]);
+}
 
 
     public function create()
